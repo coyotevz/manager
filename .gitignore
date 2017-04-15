@@ -1,0 +1,9 @@
+*.db
+*.swp
+*.pyc
+*.egg
+*.egg-info
+*.manifest
+*.so
+
+localconfig.py

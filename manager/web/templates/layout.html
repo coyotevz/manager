@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es-ar">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+      integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+      crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('web.static', filename='main.css') }}">
+
+    <title>{% block title %}{% endblock %} - Manager</title>
+    {%- block page_style %}{% endblock %}
+  </head>
+
+  <body>
+    <noscript>
+      <div class="print-display-none" style="background-color: yellow; padding: 10px; text-align: center; font-weight: bold; border-bottom: 1px solid #ccc; font-size: 16px;">JavaScript Error</div>
+    </noscript>
+
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+      <button class="navbar-toggler" type="button" data-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <a class="navbar-brand" href="{{ url_for('web.index') }}">Manager</a>
+        <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link" href="#">Empresas</a>
+          <a class="nav-item nav-link" href="{{ url_for('preferences.index') }}">Preferencias</a>
+          <a class="nav-item nav-link" href="{{ url_for('web.about') }}"">Acerca de</a>
+        </div>
+        <div class="navbar-nav">
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+              User name
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="#">Perfil</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Cerrar sesión</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+      integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+      crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+    integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+    integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+    crossorigin="anonymous"></script>
+
+  {%- block page_script %}{% endblock %}
+  </body>
+</html>

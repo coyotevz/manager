@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Select Timezone{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-block">
+      <h2 class="card-title">Región horaria</h2>
+      <form method="post">
+        <div class="form-group">
+          <label for="timezone">Región horaria</label>
+          <select class="form-control" id="timezone">
+            <option>tz 1</option>
+            <option>tz 2</option>
+            <option>tz 3</option>
+          </select>
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Actualizar">
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

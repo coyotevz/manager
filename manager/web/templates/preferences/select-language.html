@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Select Language{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-block">
+      <h2 class="card-title">Idioma</h2>
+      <form method="post">
+        <div class="form-group">
+          <label for="language">Idioma</label>
+          <select class="form-control" id="language">
+            <option>Language 1</option>
+            <option>Language 2</option>
+            <option>Language 3</option>
+          </select>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Actualizar">
+      </form>
+    </div>
+  </div>
+{% endblock %}

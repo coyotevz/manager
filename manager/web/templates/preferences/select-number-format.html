@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Select number format{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-block">
+      <h2 class="card-title">Formato de número</h2>
+      <form method="post">
+        <div class="form-group">
+          <label for="number-format">Formato de número</label>
+          <select class="form-control" id="number-format">
+            <option>Number format 1</option>
+            <option>Number format 2</option>
+            <option>Number format 3</option>
+          </select>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Actualizar">
+      </form>
+    </div>
+  </div>
+{% endblock %}

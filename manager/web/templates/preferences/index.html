@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Preferencias{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-block">
+      <h2 class="card-title">Preferencias</h2>
+      <dl class="card-text">
+
+        <dt>Idioma</dt>
+        <dd><a href="{{ url_for('preferences.select_language') }}">español</a></dd>
+
+        <dt>Formato de fecha</dt>
+        <dd><a href="{{ url_for('preferences.select_date_format') }}">14/04/2017</a></dd>
+
+        <dt>Formato de número</dt>
+        <dd><a href="{{ url_for('preferences.select_number_format') }}">123.456,00</a></dd>
+
+        <dt>Timezone</dt>
+        <dd><a href="{{ url_for('preferences.select_timezone') }}">UTC -03:00</a></dd>
+
+      </dl>
+    </div>
+  </div>
+{% endblock %}
