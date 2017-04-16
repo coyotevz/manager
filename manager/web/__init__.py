@@ -4,9 +4,7 @@ from flask import Blueprint, render_template
 
 from .preferences import prefs
 
-web = Blueprint('web', __name__,
-                template_folder='templates',
-                static_folder='static')
+web = Blueprint('web', __name__, template_folder='templates', static_folder='static')
 
 def configure_web(app):
     app.register_blueprint(web)

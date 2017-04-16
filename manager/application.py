@@ -4,6 +4,7 @@ from flask import Flask
 
 from .models import configure_db
 from .web import configure_web
+from .assets import configure_assets
 
 
 DEFAULT_APPNAME = 'manager-server'
@@ -14,11 +15,12 @@ def create_app(config=None, app_name=None):
     if app_name is None:
         app_name = DEFAULT_APPNAME
 
-    app = Flask(app_name, static_folder=None)
+    app = Flask(app_name)
 
     configure_app(app, config)
     configure_db(app)
     configure_web(app)
+    configure_assets(app)
 
     return app
 

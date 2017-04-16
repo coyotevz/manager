@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet"
+    <!--link rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
       integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-      crossorigin="anonymous">
+      crossorigin="anonymous"-->
 
-    <link rel="stylesheet" href="{{ url_for('web.static', filename='main.css') }}">
+    <!-- style webassets -->
+    {% assets "style" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
 
     <title>{% block title %}{% endblock %} - Manager</title>
     {%- block page_style %}{% endblock %}
@@ -31,7 +34,7 @@
         <div class="navbar-nav mr-auto">
           <a class="nav-item nav-link" href="#">Empresas</a>
           <a class="nav-item nav-link" href="{{ url_for('preferences.index') }}">Preferencias</a>
-          <a class="nav-item nav-link" href="{{ url_for('web.about') }}"">Acerca de</a>
+          <a class="nav-item nav-link" href="{{ url_for('web.about') }}">Acerca de</a>
         </div>
         <div class="navbar-nav">
           <div class="nav-item dropdown">
@@ -52,16 +55,11 @@
       {% block content %}{% endblock %}
     </div>
 
-    <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-      integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-      crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-    integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-    integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-    crossorigin="anonymous"></script>
+
+  <!-- js webassets -->
+  {% assets "script" %}
+  <script src="{{ ASSET_URL }}"></script>
+  {% endassets %}
 
   {%- block page_script %}{% endblock %}
   </body>
