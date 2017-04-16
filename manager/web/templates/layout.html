@@ -5,12 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <!--link rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-      integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-      crossorigin="anonymous"-->
-
     <!-- style webassets -->
     {% assets "style" %}
     <link rel="stylesheet" href="{{ ASSET_URL }}">
@@ -25,14 +19,14 @@
       <div class="print-display-none" style="background-color: yellow; padding: 10px; text-align: center; font-weight: bold; border-bottom: 1px solid #ccc; font-size: 16px;">JavaScript Error</div>
     </noscript>
 
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <nav class="navbar navbar-toggleable-md navbar-light">
       <button class="navbar-toggler" type="button" data-target="#navbarNavDropdown">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <a class="navbar-brand" href="{{ url_for('web.index') }}">Manager</a>
         <div class="navbar-nav mr-auto">
-          <a class="nav-item nav-link" href="#">Empresas</a>
+          <a class="nav-item nav-link" href="{{ url_for('business.index') }}">Empresas</a>
           <a class="nav-item nav-link" href="{{ url_for('preferences.index') }}">Preferencias</a>
           <a class="nav-item nav-link" href="{{ url_for('web.about') }}">Acerca de</a>
         </div>
