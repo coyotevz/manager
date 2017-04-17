@@ -1,0 +1,54 @@
+{% extends "business/layout.html" %}
+
+{% block title %}Resumen{% endblock %}
+
+{% block buz %}
+  <div class="card">
+    <div class="card-header d-flex">
+      <h5>Resumen de cuentas</h5>
+      <button class="btn btn-secondary btn-sm ml-auto">Establecer periodo</button>
+    </div>
+    <div class="card-block">
+      <div class="row">
+        <div class="col-6">
+          <div class="text-center text-muted mb-2">
+            <div class="font-weight-bold">Hoja de Balance</div>
+            <div class="small">Al 17/04/2017</div>
+          </div>
+          <div class="summary-card">
+            <div class="card-header d-flex">
+              <h6>Activos</h6><h6 class="ml-auto">$ 2.365.459,86</h6>
+            </div>
+            <div class="card-block">
+              This are the assets
+              <br/>
+              accounts.
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="text-center text-muted mb-2">
+            <div class="font-weight-bold">Cuentas de pérdidas y ganancias</div>
+            <div class="small">Para el periodo del 28/03/2017 al 17/04/2017</div>
+          </div>
+          <div class="summary-card">
+            <div class="card-header d-flex">
+              <h6>Ingresos</h6><h6 class="ml-auto">$ 128.362,62</h6>
+            </div>
+            <div class="card-block">
+              This are the incomes
+            </div>
+          </div>
+          <div class="summary-card">
+            <div class="card-header d-flex">
+              <h6>Egresos</h6><h6 class="ml-auto">$ 76.540,00</h6>
+            </div>
+            <div class="card-block">
+              This are the outcomes
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

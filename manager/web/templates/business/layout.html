@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}Empresas{% endblock %}
+
+{% block content %}
+  <div class="pagecard">
+    <div class="card-header">
+      <h5 class="card-title">Carlos, Augusto y Germán Roccasalva S.H.</h5>
+    </div>
+    <div class="card-block">
+      <div class="row">
+        <div class="col">
+          <div class="nav flex-column">
+            <a class="nav-link active" href="{{ url_for('business.summary') }}">Resumen</a>
+            <a class="nav-link" href="{{ url_for('business.accounts') }}">Cuentas</a>
+            <a class="nav-link" href="{{ url_for('business.customers') }}">Clientes</a>
+            <a class="nav-link disabled" href="{{ url_for('business.suppliers') }}">Proveedores</a>
+          </div>
+        </div>
+        <div class="business-content col-10">
+          {% block buz %}
+            <div class="card text-center">
+              <div class="card-header">
+                <span>Uncomplete template</span>
+              </div>
+              <div class="card-block">
+                <h4 class="card-title">Uncomplete template</h4>
+                <p class="card-text">Fill the content of <mark>buz</mark> block.</p>
+              </div>
+            </div>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
