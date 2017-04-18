@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
+from decimal import Decimal
 
 from . import db
 
@@ -26,6 +27,7 @@ class Account(db.Model):
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
 
+    _code = db.Column("code", db.String)
     _balance = db.Column("balance", db.Numeric(10, 2), default=None)
     _type = db.Column("type", db.Enum(*_type_str.keys(), name='account_type'),
                       default=None)
@@ -33,11 +35,35 @@ class Account(db.Model):
     parent_id = db.Column(db.Integer, db.ForeignKey('account.id'))
     parent = db.relationship("Account", remote_side=[id], backref="children")
 
+    def get_path(self):
+        parent = self
+        path = []
+        while parent:
+            path.append(parent)
+            parent = parent.parent
+        return reversed(path)
+
+    def get_children_recursively(self):
+        children = set(self.children)
+        if not len(children):
+            return set()
+        for child in self.children:
+            children |= child.get_children_recursively()
+        return children
+
+    @property
+    def code(self):
+        return ".".join([a._code for a in self.get_path()])
+
+    @code.setter
+    def code(self, value):
+        self._code = value
+
     @property
     def type(self):
         if self._type is not None:
             return self._type
-        return self.parent._type
+        return self.parent.type
 
     @type.setter
     def type(self, value):
@@ -50,11 +76,18 @@ class Account(db.Model):
     def balance(self):
         if self.children:
             return sum([c.balance for c in self.children])
-        return self._balance or Decimla('0')
+        return self._balance or Decimal('0')
+
+    @balance.setter
+    def balance(self, value):
+        assert value in self._type_str.keys()
+        if self.children:
+            raise ValueError("Can only set type attribute to to level accounts")
+        self._type = value
 
     def __repr__(self):
-        return "<Account({}, name={}, balance={})>".format(
-                self.type, self.name, self.balance)
+        return "<Account({}, name={}, code={}, balance={})>".format(
+                self.type, self.name, self.code, self.balance)
 
 
 class AccountTransaction(db.Model):
@@ -89,15 +122,16 @@ class AccountTransactionEntry(db.Model):
         return "<AccountTransactionEntry(type={})>".format(self.type)
 
 
-def entry_instances(iter_):
+def model_instances(iter_, model):
     for obj in iter_:
-        if isinstance(obk, AccountTransactionEntry):
+        if isinstance(obj, model):
             yield obj
+
 
 @db.event.listens_for(db.session, 'before_commit')
 def _entry_before_commit(session):
     changed = list(session.new)
-    for entry in entry_instances(changed):
+    for entry in model_instances(changed, AccountTransactionEntry):
         etype = entry.type
         target = entry.target
         amount = entry.amount
@@ -109,14 +143,8 @@ def _entry_before_commit(session):
             raise TypeError("Unknown transaction type")
 
 
-def transanction_instances(iter_):
-    for obj in iter_:
-        if isinstance(obj, AccountTransaction):
-            yield obj
-
-
 @db.event.listens_for(db.session, 'before_commit')
 def _verify_transaction(session):
     changed = list(session.new) + list(session.dirty)
-    for transaction in transaction_instances(changed):
+    for transaction in model_instances(changed, AccountTransaction):
         transaction.verify()
