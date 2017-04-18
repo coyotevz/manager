@@ -52,6 +52,10 @@ class Account(db.Model):
         return children
 
     @property
+    def has_childs(self):
+        return len(self.children) != 0
+
+    @property
     def code(self):
         return ".".join([a._code for a in self.get_path()])
 

@@ -3,6 +3,15 @@
 {% set active_page = 'business' %}
 {% block title %}Empresas{% endblock %}
 
+{% set buz_menu = [
+    ('summary', 'Resumen'),
+    ('accounts', 'Cuentas'),
+    ('customers', 'Clientes'),
+    ('suppliers', 'Proveedores'),
+] %}
+
+{% set buz_active_page = buz_active_page|default('index') %}
+
 {% block content %}
   <div class="pagecard">
     <div class="card-header">
@@ -11,11 +20,10 @@
     <div class="card-block">
       <div class="row">
         <div class="col">
-          <div class="nav flex-column">
-            <a class="nav-link active" href="{{ url_for('business.summary') }}">Resumen</a>
-            <a class="nav-link" href="{{ url_for('business.accounts') }}">Cuentas</a>
-            <a class="nav-link" href="{{ url_for('business.customers') }}">Clientes</a>
-            <a class="nav-link disabled" href="{{ url_for('business.suppliers') }}">Proveedores</a>
+          <div class="nav nav-pills flex-column">
+            {% for id, caption in buz_menu %}
+              <a class="nav-link{% if id == buz_active_page %} active{% endif %}" href="{{ url_for('business.' + id) }}">{{ caption }}</a>
+            {% endfor %}
           </div>
         </div>
         <div class="business-content col-10">

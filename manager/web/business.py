@@ -2,6 +2,8 @@
 
 from flask import Blueprint, render_template, redirect, url_for
 
+from ..models import Account
+
 buz = Blueprint('business', __name__, url_prefix='/business')
 
 
@@ -15,7 +17,9 @@ def summary():
 
 @buz.route('/accounts')
 def accounts():
-    return render_template('business/accounts.html')
+    accounts = Account.query.filter(Account.parent==None)\
+                            .order_by(Account._code.asc())
+    return render_template('business/accounts.html', accounts=accounts)
 
 @buz.route('/customers')
 def customers():
