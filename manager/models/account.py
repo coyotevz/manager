@@ -57,8 +57,66 @@ class Account(db.Model):
                 self.type, self.name, self.balance)
 
 
-class AccountTransactoin(db.Model):
+class AccountTransaction(db.Model):
     __tablename__ = 'account_transaction'
 
     id = db.Column(db.Integer, primary_key=True)
     created = db.Column(db.DateTime, default=datetime.now)
+
+
+class AccountTransactionEntry(db.Model):
+    __tablename__ = 'account_transaction_entry'
+
+    TYPE_SOURCE = 'SOURCE'
+    TYPE_DEST = 'DEST'
+
+    _types = {
+        TYPE_SOURCE: 'Origen',
+        TYPE_DEST: 'Destino',
+    }
+
+    id = db.Column(db.Integer, primary_key=True)
+    target_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
+    target = db.relationship(Account, backref="transaction_entries")
+    transaction_id = db.Column(db.Integer, db.ForeignKey('account_transaction.id'),
+                               nullable=False)
+    transaction = db.relationship(AccountTransaction, backref="entries")
+    type = db.Column(db.Enum(*_types.keys(), name='entry_type'),
+                     nullable=False)
+    amount = db.Column(db.Numeric(10, 2), nullable=False)
+
+    def __repr__(self):
+        return "<AccountTransactionEntry(type={})>".format(self.type)
+
+
+def entry_instances(iter_):
+    for obj in iter_:
+        if isinstance(obk, AccountTransactionEntry):
+            yield obj
+
+@db.event.listens_for(db.session, 'before_commit')
+def _entry_before_commit(session):
+    changed = list(session.new)
+    for entry in entry_instances(changed):
+        etype = entry.type
+        target = entry.target
+        amount = entry.amount
+        if etype == AccountTransactionEntry.TYPE_SOURCE:
+            target.decrement(amount)
+        elif etype == AccountTransactionEntry.TYPE_DEST:
+            target.increment(amount)
+        else:
+            raise TypeError("Unknown transaction type")
+
+
+def transanction_instances(iter_):
+    for obj in iter_:
+        if isinstance(obj, AccountTransaction):
+            yield obj
+
+
+@db.event.listens_for(db.session, 'before_commit')
+def _verify_transaction(session):
+    changed = list(session.new) + list(session.dirty)
+    for transaction in transaction_instances(changed):
+        transaction.verify()

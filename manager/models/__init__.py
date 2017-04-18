@@ -8,3 +8,6 @@ db = SQLAlchemy()
 
 def configure_db(app):
     db.init_app(app)
+
+
+from .account import Account, AccountTransaction, AccountTransactionEntry
