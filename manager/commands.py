@@ -19,3 +19,21 @@ def dropdb():
     """Drop all database tables."""
     if click.confirm("Are you sure?  You will lose all your data!"):
         db.drop_all()
+
+
+@app.cli.command('import')
+@click.argument('filename')
+def import_xml(filename):
+    """Import data from XML file."""
+    from xml.etree import ElementTree as ET
+    from manager.models.account import import_account_data
+
+    click.echo("Importing data from: {}".format(filename))
+    tree = ET.parse(filename)
+
+    db.create_all()
+
+    for accounts_data in tree.findall('accounts'):
+        import_account_data(accounts_data)
+
+    db.session.commit()

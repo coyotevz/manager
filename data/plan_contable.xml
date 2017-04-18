@@ -1,76 +1,79 @@
 <?xml version="1.0"?>
 
-<accounts description="Plan Contable Argentino">
+<data>
 
-  <!-- cuentas de estado patrimonial -->
-  <account code="1" name="Activo" type="ASSET">
-    <account code="1" name="Activo Corriente">
-      <account code="1" name="Disponibilidades">
-        <account code="1" name="Caja General"/>
-        <account code="2" name="Caja Ahorro"/>
-        <account code="3" name="Caja mostrador Ciudad"/>
-        <account code="4" name="Caja mostrador Godoy Cruz"/>
-        <account code="5" name="Banco Santander Río Cta Cte"/>
-      </account>
-      <account code="2" name="Deudores por Venta">
-        <account code="1" name="Cliente Ciudad"/>
-        <account code="2" name="Cliente Godoy Cruz"/>
-        <account code="3" name="Documentos a cobrar"/>
-        <account code="4" name="Tarjeta VISA"/>
-        <account code="5" name="Tarjeta Mastercard"/>
-        <account code="6" name="Tarjeta Nevada"/>
-      </account>
-      <account code="3" name="Créditos Fiscales">
-        <account code="1" name="IVA Crédito Fiscal"/>
-        <account code="2" name="Retenciones / Percepciones IVA"/>
-        <account code="3" name="IVA Saldo a Favor"/>
-        <account cod3="4" name="Retenciones / Percepciones Ingresos Brutos"/>
-        <account code="5" name="Ingresos Brutos Saldo a Favor"/>
-        <account code="6" name="Retenciones / Percepciones Imp. Ganancias"/>
-        <account code="7" name="Anticipo Impuesto Ganancias"/>
-        <account code="8" name="Retenciones / Percepciones Seguridad Social"/>
-        <account code="9" name="Otros créditos fiscales"/>
-      </account>
-      <account code="4" name="Otros Créditos">
-        <account code="1" name="Anticipos de Sueldo"></account>
-        <account code="2" name="Adelantos a Proveedores"/>
-        <account code="3" name="Adelantos Cuenta Particular">
-          <account code="1" name="Adelantos Carlos R."/>
-          <account code="2" name="Adelantos Augusto R."/>
-          <account code="3" name="Adelantos Germán R."/>
+  <accounts description="Plan Contable Argentino">
+
+    <!-- cuentas de estado patrimonial -->
+    <account code="1" name="Activo" type="ASSET">
+      <account code="1" name="Activo Corriente">
+        <account code="1" name="Disponibilidades">
+          <account code="1" name="Caja General"/>
+          <account code="2" name="Caja Ahorro"/>
+          <account code="3" name="Caja mostrador Ciudad"/>
+          <account code="4" name="Caja mostrador Godoy Cruz"/>
+          <account code="5" name="Banco Santander Río Cta Cte"/>
         </account>
-        <account code="4" name="Adelantos de Honorarios"/>
+        <account code="2" name="Deudores por Venta">
+          <account code="1" name="Cliente Ciudad"/>
+          <account code="2" name="Cliente Godoy Cruz"/>
+          <account code="3" name="Documentos a cobrar"/>
+          <account code="4" name="Tarjeta VISA"/>
+          <account code="5" name="Tarjeta Mastercard"/>
+          <account code="6" name="Tarjeta Nevada"/>
+        </account>
+        <account code="3" name="Créditos Fiscales">
+          <account code="1" name="IVA Crédito Fiscal"/>
+          <account code="2" name="Retenciones / Percepciones IVA"/>
+          <account code="3" name="IVA Saldo a Favor"/>
+          <account code="4" name="Retenciones / Percepciones Ingresos Brutos"/>
+          <account code="5" name="Ingresos Brutos Saldo a Favor"/>
+          <account code="6" name="Retenciones / Percepciones Imp. Ganancias"/>
+          <account code="7" name="Anticipo Impuesto Ganancias"/>
+          <account code="8" name="Retenciones / Percepciones Seguridad Social"/>
+          <account code="9" name="Otros créditos fiscales"/>
+        </account>
+        <account code="4" name="Otros Créditos">
+          <account code="1" name="Anticipos de Sueldo"></account>
+          <account code="2" name="Adelantos a Proveedores"/>
+          <account code="3" name="Adelantos Cuenta Particular">
+            <account code="1" name="Adelantos Carlos R."/>
+            <account code="2" name="Adelantos Augusto R."/>
+            <account code="3" name="Adelantos Germán R."/>
+          </account>
+          <account code="4" name="Adelantos de Honorarios"/>
+        </account>
+        <account code="5" name="Bienes de Cambio">
+          <account code="1" name="Mercadería Ciudad"/>
+          <account code="2" name="Mercadería Godoy Cruz"/>
+          <account code="3" name="Mercadería en Transito"/>
+        </account>
+        <account code="6" name="Inversiones">
+          <account code="1" name="Plazo Fijo"/>
+          <account code="2" name="Int. Plazo Fijo a devengar"/>
+          <account code="3" name="Prestamos a cobrar"/>
+          <account code="4" name="Int. Prestamos a devengar"/>
+          <account code="5" name="Acciones"/>
+          <account code="6" name="Otras Inversiones"/>
+        </account>
       </account>
-      <account code="5" name="Bienes de Cambio">
-        <account code="1" name="Mercadería Ciudad"/>
-        <account code="2" name="Mercadería Godoy Cruz"/>
-        <account code="3" name="Mercadería en Transito"/>
-      </account>
-      <account code="6" name="Inversiones">
-        <account code="1" name="Plazo Fijo"/>
-        <account code="2" name="Int. Plazo Fijo a devengar"/>
-        <account code="3" name="Prestamos a cobrar"/>
-        <account code="4" name="Int. Prestamos a devengar"/>
-        <account code="5" name="Acciones"/>
-        <account code="6" name="Otras Inversiones"/>
+      <account code="1" name="Activo No Corriente">
+        <account code="1" name="Bienes de Uso"></account>
+        <account code="2" name="Otros activos fijos"></account>
       </account>
     </account>
-    <account code="1" name="Activo No Corriente">
-      <account code="1" name="Bienes de Uso"></account>
-      <account code="2" name="Otros activos fijos"></account>
+    <account code="2" name="Pasivo" type="LIABILITY">
+      <account code="1" name="Pasivo Corriente"></account>
+      <account code="2" name="Pasivo No Corriente"></account>
     </account>
-  </account>
-  <account code="2" name="Pasivo" type="LIABILITY">
-    <account code="1" name="Pasivo Corriente"></account>
-    <account code="2" name="Pasivo No Corriente"></account>
-  </account>
-  <account code="3" name="Patrimonio Neto" type="EQUITY">
-    <account code="1" name="Capital Social"></account>
-    <account code="2" name="Resultados Acumulados"></account>
-  </account>
+    <account code="3" name="Patrimonio Neto" type="EQUITY">
+      <account code="1" name="Capital Social"></account>
+      <account code="2" name="Resultados Acumulados"></account>
+    </account>
 
-  <!-- cuentas de estado de resultado -->
-  <account code="4" name="Ingresos" type="INCOME"></account>
-  <account code="5" name="Gastos" type="EXPENSE"></account>
+    <!-- cuentas de estado de resultado -->
+    <account code="4" name="Ingresos" type="INCOME"></account>
+    <account code="5" name="Gastos" type="EXPENSE"></account>
 
-</accounts>
+  </accounts>
+</data>

@@ -148,3 +148,19 @@ def _verify_transaction(session):
     changed = list(session.new) + list(session.dirty)
     for transaction in model_instances(changed, AccountTransaction):
         transaction.verify()
+
+
+# Import data from XML file (etree interface)
+
+def import_account_data(element):
+    for el in list(element):
+        acc = _recursive_import_data(el)
+        db.session.add(acc)
+
+
+def _recursive_import_data(element):
+    if element.tag == 'account':
+        acc = Account(**element.attrib)
+        for child in list(element):
+            acc.children.append(_recursive_import_data(child))
+        return acc
