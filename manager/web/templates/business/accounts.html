@@ -6,7 +6,7 @@
 {% set count = [0] %}
 {% macro render_account_row(account, parent=None) %}
   {% if count.append(count.pop() + 1) %}{% endif %} {# increment count by 1 #}
-  <tr {% if parent is none %}class="top-account"{% else %}data-pnode="treetable-parent-{{ parent }}"{% endif %} data-node="treetable-{{ count[0] }}">
+  <tr class="{% if account.has_childs %}has-childs{% endif %} {% if parent is none %}top-account{% endif %}" {% if parent %}data-pnode="treetable-parent-{{ parent }}"{% endif %} data-node="treetable-{{ count[0] }}">
     <td class="account-code">{{ account.code }}</td>
     <td class="account-name">{{ account.name }}</td>
     <td class="account-balance">$ {{ account.balance }},00</td>
