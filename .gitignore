@@ -7,4 +7,5 @@
 *.so
 
 localconfig.py
-/static/
+.webassets-cache*
+manager/web/static/assets/

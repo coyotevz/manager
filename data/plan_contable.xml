@@ -57,7 +57,7 @@
           <account code="6" name="Otras Inversiones"/>
         </account>
       </account>
-      <account code="1" name="Activo No Corriente">
+      <account code="2" name="Activo No Corriente">
         <account code="1" name="Bienes de Uso"></account>
         <account code="2" name="Otros activos fijos"></account>
       </account>

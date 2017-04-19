@@ -15,7 +15,7 @@ def create_app(config=None, app_name=None):
     if app_name is None:
         app_name = DEFAULT_APPNAME
 
-    app = Flask(app_name)
+    app = Flask(app_name, static_folder='manager/web/static')
 
     configure_app(app, config)
     configure_db(app)

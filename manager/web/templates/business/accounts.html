@@ -3,19 +3,18 @@
 {% block title %}Cuentas{% endblock %}
 {% set buz_active_page = 'accounts' %}
 
-{% macro render_account(acc) %}
-<li>
-  {% if acc.has_childs %}
-  <span class="font-weight-bold">{{ acc.name }}</span>
-  <ol>
-    {% for child in acc.children %}
-      {{ render_account(child) }}
-    {% endfor %}
-  </ol>
-  {% else %}
-  <span>{{ acc.name }}</span>
-  {% endif %}
-</li>
+{% set count = [0] %}
+{% macro render_account_row(account, parent=None) %}
+  {% if count.append(count.pop() + 1) %}{% endif %} {# increment count by 1 #}
+  <tr {% if parent is none %}class="top-account"{% else %}data-pnode="treetable-parent-{{ parent }}"{% endif %} data-node="treetable-{{ count[0] }}">
+    <td class="account-code">{{ account.code }}</td>
+    <td class="account-name">{{ account.name }}</td>
+    <td class="account-balance">$ {{ account.balance }},00</td>
+  </tr>
+  {% set count_data = count[0] + 0 %}
+  {% for child in account.children %}
+    {{ render_account_row(child, count_data) }}
+  {% endfor %}
 {% endmacro %}
 
 {% block buz %}
@@ -25,11 +24,22 @@
       <button class="btn btn-primary btn-sm ml-auto">Nueva Cuenta</button>
     </div>
     <div class="card-block">
-      <ol>
-        {% for account in accounts %}
-          {{ render_account(account) }}
-        {% endfor %}
-      </ol>
+      <table class="table table-sm account-chart">
+        <tbody>
+          {% for account in accounts %}
+            {{ render_account_row(account) }}
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
+{% endblock %}
+
+{% block page_script %}
+  <script>
+    $('.account-chart').treeFy({
+      treeColumn: 1,
+      initState: 'collapsed',
+    });
+  </script>
 {% endblock %}
