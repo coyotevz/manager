@@ -21,11 +21,11 @@ def accounts():
                             .order_by(Account._code.asc())
     return render_template('business/accounts.html', accounts=accounts)
 
-@buz.route('/customers')
-def customers():
-    return render_template('business/customers.html')
-
 @buz.route('/suppliers')
 def suppliers():
     suppliers = Supplier.query
     return render_template('business/suppliers.html', suppliers=suppliers)
+
+@buz.route('/purchase-documents')
+def purchase_documents():
+    return render_template('business/purchase-documents.html')

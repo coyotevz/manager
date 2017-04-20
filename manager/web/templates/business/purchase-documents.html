@@ -1,0 +1,54 @@
+{% extends "business/layout.html" %}
+
+{% block title %}Facturas de compra{% endblock %}
+{% set buz_active_page = 'purchase_documents' %}
+
+{% block buz %}
+  <div class="card">
+    <div class="card-header d-flex">
+      <h5>Facturas de compra</h5>
+      <button class="btn btn-primary btn-sm ml-auto">Nueva Factura</button>
+    </div>
+    <table class="table table-sm purchase-documents-list">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Número</th>
+          <th>Proveedor</th>
+          <th>Total factura</th>
+          <th>Saldo adeudado</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>$ 57.449,25</th>
+          <th>$ 12.384,25</th>
+          <th></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <!-- faked data -->
+        <tr>
+          <td>17/04/2017</td>
+          <td><a href="#">000103-00456321</a></td>
+          <td>FV S.A.</td>
+          <td>$ 12.384,25</td>
+          <td>$ 12.384,25</td>
+          <td>Vence en 4 días</td>
+        </tr>
+        <tr>
+          <td>29/03/2017</td>
+          <td><a href="#">000045-00006589</a></td>
+          <td>IPS S.A.C.I. y F.</td>
+          <td>$ 45.065,00</td>
+          <td>$ 0,00</td>
+          <td>Pagado</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
