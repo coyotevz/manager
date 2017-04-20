@@ -2,7 +2,7 @@
 
 from flask import Blueprint, render_template, redirect, url_for
 
-from ..models import Account
+from ..models import Account, Supplier
 
 buz = Blueprint('business', __name__, url_prefix='/business')
 
@@ -27,4 +27,5 @@ def customers():
 
 @buz.route('/suppliers')
 def suppliers():
-    return render_template('business/suppliers.html')
+    suppliers = Supplier.query
+    return render_template('business/suppliers.html', suppliers=suppliers)

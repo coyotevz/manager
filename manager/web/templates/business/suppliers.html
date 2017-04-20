@@ -1,3 +1,41 @@
 {% extends "business/layout.html" %}
 
+{% block title %}Proveedores{% endblock %}
 {% set buz_active_page = 'suppliers' %}
+
+{% macro render_supplier_row(supplier) %}
+  <tr>
+    <td><button class="btn btn-outline-secondary btn-sm"><i class="fa fa-pencil"></i></button></td>
+    <td>{{ supplier.rz }}</td>
+    <td>{{ supplier.name or '' }}</td>
+    <td></td>
+    <td></td>
+  </tr>
+{% endmacro %}
+
+{% block buz %}
+  <div class="card">
+    <div class="card-header d-flex">
+      <h5>Proveedores</h5>
+      <button class="btn btn-primary btn-sm ml-auto">Nuevo Proveedor</button>
+    </div>
+    <div class="card-block">
+      <table class="table table-sm table-striped suppliers-list">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Razón Social</th>
+            <th>Nombre</th>
+            <th>Facturas</th>
+            <th>A pagar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for supplier in suppliers %}
+            {{ render_supplier_row(supplier) }}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

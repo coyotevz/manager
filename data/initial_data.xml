@@ -76,4 +76,11 @@
     <account code="5" name="Gastos" type="EXPENSE"></account>
 
   </accounts>
+
+  <suppliers description="sample suppliers">
+    <supplier rz="Supplier 1 S.A." name="Supplier 1"/>
+    <supplier rz="Supplier 2 S.R.L."/>
+    <supplier rz="Supplier 3" name="Mr. Supplier"/>
+  </suppliers>
+
 </data>

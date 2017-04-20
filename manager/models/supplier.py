@@ -39,7 +39,7 @@ class Supplier(db.Model):
 
 
 @db.event.listens_for(Supplier, "init")
-def supplier_init(target, args, kargs):
+def supplier_init(target, args, kwargs):
     # Sets defaults to instance
     if 'delivery_included' not in kwargs:
         target.delivery_included = False
@@ -47,3 +47,10 @@ def supplier_init(target, args, kargs):
         target.debt = Decimal(0)
     if 'expired' not in kwargs:
         target.expired = Decimal(0)
+
+# Import data from XML file (etree interface)
+
+def import_supplier_data(element):
+    for el in list(element):
+        supplier = Supplier(**el.attrib)
+        db.session.add(supplier)
