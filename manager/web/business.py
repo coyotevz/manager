@@ -3,6 +3,7 @@
 from flask import Blueprint, render_template, redirect, url_for
 
 from ..models import Account, Supplier
+from ..forms import SupplierForm
 
 buz = Blueprint('business', __name__, url_prefix='/business')
 
@@ -25,6 +26,23 @@ def accounts():
 def suppliers():
     suppliers = Supplier.query
     return render_template('business/suppliers.html', suppliers=suppliers)
+
+@buz.route('/suppliers/new', methods=['GET', 'POST'])
+def supplier_new():
+    form = SupplierForm()
+    if form.validate_on_submit():
+        redirect(url_for('.suppliers'))
+    return render_template('business/supplier-form.html', new=True, form=form)
+
+@buz.route('/suppliers/<int:id>')
+def supplier_view(id):
+    supplier = Supplier.query.get_or_404(id)
+    return render_template('business/supplier-view.html', supplier=supplier)
+
+@buz.route('/suppliers/<int:id>/edit', methods=['GET', 'POST'])
+def supplier_edit(id):
+    supplier = Supplier.query.get_or_404(id)
+    return render_template('business/supplier-form.html', new=False)
 
 @buz.route('/purchase-documents')
 def purchase_documents():

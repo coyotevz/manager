@@ -1,0 +1,40 @@
+{% extends "business/layout.html" %}
+
+{% block title %}{% if new %}Nuevo{% else %}Editar{% endif %} proveedor{% endblock %}
+{% set buz_active_page = 'suppliers' %}
+
+{% block buz %}
+  <div class="card">
+    <div class="card-header d-flex">
+      <h5>Nuevo Proveedor</h5>
+    </div>
+    <div class="card-block">
+      <form method="post">
+        {{ form.hidden_tag() }}
+        <div class="form-group{% if form.rz.errors %} has-danger{% endif %}">
+          {{ form.rz.label(class_="form-control-label") }}
+          {{ form.rz(class_="form-control") }}
+          {% if form.rz.errors %}
+            <div class="form-control-feedback">
+              {% for error in form.rz.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+          {% if form.rz.description %}
+            <small class="form-text text-muted">{{ form.rz.description }}</small>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          {{ form.name.label }}
+          {{ form.name(class="form-control", placeholder="Opcional") }}
+          {% if form.name.description %}
+            <small class="form-text text-muted">{{ form.name.description }}</small>
+          {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="cancel" class="btn btn-warning">Cancelar</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -5,7 +5,7 @@
 
 {% macro render_supplier_row(supplier) %}
   <tr>
-    <td><a href="#{{ supplier.id }}">{{ supplier.rz }}</a></td>
+    <td><a href="{{ url_for('business.supplier_view', id=supplier.id) }}">{{ supplier.rz }}</a></td>
     <td>{{ supplier.name or '' }}</td>
     <td></td>
     <td></td>
@@ -16,7 +16,7 @@
   <div class="card">
     <div class="card-header d-flex">
       <h5>Proveedores</h5>
-      <button class="btn btn-primary btn-sm ml-auto">Nuevo Proveedor</button>
+      <a class="btn btn-primary btn-sm ml-auto" href="{{ url_for('business.supplier_new') }}">Nuevo Proveedor</a>
     </div>
     <table class="table table-sm suppliers-list">
       <thead>
