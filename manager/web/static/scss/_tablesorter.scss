@@ -1,0 +1,30 @@
+.tablesorter-header {
+  .tablesorter-header-inner {
+    @extend .d-flex;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .fa {
+      line-height: 18px;
+      width: 10px;
+    }
+    .fa-fw {
+      width: 10px;
+    }
+  }
+}
+
+table th {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+}
