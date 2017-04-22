@@ -1,6 +1,7 @@
 Flask-SQLAlchemy
-Flask-Assets
 Flask-WTF
+Flask-Assets
+sqlalchemy-utils
 libsass
 cssmin
 jsmin
