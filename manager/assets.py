@@ -26,10 +26,11 @@ style = Bundle(
 
 script = Bundle(
     # jQuery first, then Tether, then Bootstrap JS.
-    'web/js/jquery-3.1.1.slim.js',
+    'web/js/jquery-3.2.1.slim.js',
     'web/js/tether.js',
     'web/js/bootstrap.js',
     'web/js/bootstrap-treefy.js',
+    'web/js/jquery.tablesorter.js',
     filters='jsmin',
     output='assets/script.js',
 )

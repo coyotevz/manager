@@ -21,10 +21,9 @@
     <table class="table table-sm suppliers-list">
       <thead>
         <tr>
-          <th>Razón Social</th>
-          <th>Nombre</th>
-          <th>Facturas</th>
-          <th>A pagar</th>
+          {% for title in ["Razón Social", "Nombre", "Facturas", "A pagar"] %}
+            <th><a href="#">{{ title }}</a></th>
+          {% endfor %}
         </tr>
       </thead>
       <tbody>
@@ -34,4 +33,21 @@
       </tbody>
     </table>
   </div>
+{% endblock %}
+
+{% block page_script %}
+  <script>
+    $(function() {
+      $('.suppliers-list').tablesorter({
+        headerTemplate: '{content} {icon}',
+        cssIcon: "fa ml-2",
+        cssIconAsc: "fa-caret-down",
+        cssIconDesc: "fa-caret-up",
+        cssIconNone: "fa-fw",
+        selectorSort: "a",
+      }).bind("sortBegin", function(e, table) {
+        console.log("sortBegin:", e, table);
+      });
+    });
+  </script>
 {% endblock %}
