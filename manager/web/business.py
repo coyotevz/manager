@@ -2,7 +2,7 @@
 
 from flask import Blueprint, render_template, redirect, url_for
 
-from ..models import Account, Supplier
+from ..models import db, Account, Supplier
 from ..forms import SupplierForm
 
 buz = Blueprint('business', __name__, url_prefix='/business')
@@ -31,7 +31,11 @@ def suppliers():
 def supplier_new():
     form = SupplierForm()
     if form.validate_on_submit():
-        redirect(url_for('.suppliers'))
+        clean_data = {k: v for k, v in form.data.items() if k != 'csrf_token'}
+        new_supplier = Supplier(**clean_data)
+        db.session.add(new_supplier)
+        db.session.commit()
+        return redirect(url_for('.suppliers'))
     return render_template('business/supplier-form.html', new=True, form=form)
 
 @buz.route('/suppliers/<int:id>')
