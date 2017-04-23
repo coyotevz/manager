@@ -26,10 +26,11 @@
       <h5>Nuevo Proveedor</h5>
     </div>
     <div class="card-block">
-      <form method="post">
+      <form method="post" id="supplier-form">
         {{ form.hidden_tag() }}
         {{ render_form_group(form.rz) }}
         {{ render_form_group(form.name, placeholder="Opcional") }}
+        {% if new %}
         <div class="btn-group">
           <button type="button" class="btn btn-primary" id="btnCreate">Crear</button>
           <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
@@ -38,6 +39,9 @@
             <button class="dropdown-item" type="button" id="btnCreateAdd">Crear y agregar otro</button>
           </div>
         </div>
+        {% else %}
+        <span>Write update button and functionality</span>
+        {% endif %}
       </form>
     </div>
   </div>
@@ -47,12 +51,24 @@
   <script>
     $(function() {
       $('#btnCreate').click(function(e) {
-        e.preventDefault();
-        console.log('Only create supplier');
+        var data = $('#supplier-form').find('select, textarea, input').serialize();
+        axios.post('', data)
+          .then(function(response) {
+            $(location).attr('href', '{{ url_for(".suppliers") }}');
+          })
+          .catch(function(error) {
+            console.log('error:', error);
+          });
       });
       $('#btnCreateAdd').click(function(e) {
-        e.preventDefault();
-        console.log('Create and Add another supplier');
+        var data = $('#supplier-form').find('select, textarea, input').serialize();
+        axios.post('', data)
+          .then(function(response) {
+            $('#supplier-form')[0].reset();
+          })
+          .catch(function(error) {
+            console.log('error:', error);
+          });
       });
     });
   </script>

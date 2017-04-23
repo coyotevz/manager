@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, request
 
 from ..models import db, Account, Supplier
 from ..forms import SupplierForm
+from ..utils import json_response
 
 buz = Blueprint('business', __name__, url_prefix='/business')
 
@@ -35,6 +36,8 @@ def supplier_new():
         new_supplier = Supplier(**clean_data)
         db.session.add(new_supplier)
         db.session.commit()
+        if request.is_xhr:
+            return json_response({'id': new_supplier.id}, 201)
         return redirect(url_for('.suppliers'))
     return render_template('business/supplier-form.html', new=True, form=form)
 
