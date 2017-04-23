@@ -30,9 +30,30 @@
         {{ form.hidden_tag() }}
         {{ render_form_group(form.rz) }}
         {{ render_form_group(form.name, placeholder="Opcional") }}
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <button type="cancel" class="btn btn-warning">Cancelar</button>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" id="btnCreate">Crear</button>
+          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+          </button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item" type="button" id="btnCreateAdd">Crear y agregar otro</button>
+          </div>
+        </div>
       </form>
     </div>
   </div>
+{% endblock %}
+
+{% block page_script %}
+  <script>
+    $(function() {
+      $('#btnCreate').click(function(e) {
+        e.preventDefault();
+        console.log('Only create supplier');
+      });
+      $('#btnCreateAdd').click(function(e) {
+        e.preventDefault();
+        console.log('Create and Add another supplier');
+      });
+    });
+  </script>
 {% endblock %}
