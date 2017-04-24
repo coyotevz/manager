@@ -32,13 +32,15 @@ def suppliers():
 def supplier_new():
     form = SupplierForm()
     if form.validate_on_submit():
-        clean_data = {k: v for k, v in form.data.items() if k != 'csrf_token'}
+        clean_data = {k: v for k, v in form.data.items() if (k != 'csrf_token' and v not in ('', None))}
         new_supplier = Supplier(**clean_data)
         db.session.add(new_supplier)
         db.session.commit()
         if request.is_xhr:
             return json_response({'id': new_supplier.id}, 201)
         return redirect(url_for('.suppliers'))
+    if request.is_xhr:
+        return json_response({'errors': form.errors}, 422)
     return render_template('business/supplier-form.html', new=True, form=form)
 
 @buz.route('/suppliers/<int:id>')

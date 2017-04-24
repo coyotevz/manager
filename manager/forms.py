@@ -1,11 +1,22 @@
 # -*- coding: utf-8 -*-
 
 from flask_wtf import FlaskForm
-from wtforms import StringField
-from wtforms.validators import DataRequired
+from wtforms_alchemy import model_form_factory
+
+from .models import db, Supplier
 
 
-class SupplierForm(FlaskForm):
+BaseModelForm = model_form_factory(FlaskForm)
 
-    rz = StringField('Razón Social', validators=[DataRequired()])
-    name = StringField('Nombre', description="Marca o nombre de fantasía utlizado por el proveedor")
+
+class ModelForm(BaseModelForm):
+
+    @classmethod
+    def get_session(self):
+        return db.session
+
+
+class SupplierForm(ModelForm):
+
+    class Meta:
+        model = Supplier

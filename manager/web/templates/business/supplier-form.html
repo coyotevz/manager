@@ -3,10 +3,10 @@
 {% block title %}{% if new %}Nuevo{% else %}Editar{% endif %} proveedor{% endblock %}
 {% set buz_active_page = 'suppliers' %}
 
-{% macro render_form_group(field, placeholder=None) %}
+{% macro render_form_group(field) %}
   <div class="form-group{% if field.errors %} has-danger{% endif %}">
     {{ field.label(class_="form-control-label") }}
-    {{ field(class_="form-control", placeholder=placeholder if placeholder else '') }}
+    {{ field(class_="form-control") }}
     {% if field.errors %}
       <div class="form-control-feedback">
         {% for error in field.errors %}
@@ -29,7 +29,7 @@
       <form method="post" id="supplier-form">
         {{ form.hidden_tag() }}
         {{ render_form_group(form.rz) }}
-        {{ render_form_group(form.name, placeholder="Opcional") }}
+        {{ render_form_group(form.name) }}
         {% if new %}
         <div class="btn-group">
           <button type="button" class="btn btn-primary" id="btnCreate">Crear</button>
