@@ -20,3 +20,4 @@ class SupplierForm(ModelForm):
 
     class Meta:
         model = Supplier
+        only = ('rz', 'name', 'type', 'delivery_included')
