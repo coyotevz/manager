@@ -9,33 +9,30 @@ from sqlalchemy_utils import ChoiceType
 from . import db
 
 
-class SupplierType(Enum):
-    PRODUCTS = 'Productos'
-    SERVICES = 'Servicios'
-    SUPPLIES = 'Insumos'
-
-
 class Supplier(db.Model):
     __tablename__ = 'supplier'
 
+    TYPE_PRODUCTS = 'PRODUCTS'
+    TYPE_SERVICES = 'SERVICES'
+    TYPE_SUPPLIES = 'SUPPLIES'
+
     TYPES = [
-        ('PRODUCTS', 'Productos'),
-        ('SERVICES', 'Servicios'),
-        ('SUPPLIES', 'Insumos'),
+        (TYPE_PRODUCTS, 'Productos'),
+        (TYPE_SERVICES, 'Servicios'),
+        (TYPE_SUPPLIES, 'Insumos'),
     ]
 
     id = db.Column(db.Integer, primary_key=True)
-    rz = db.Column(db.String, unique=True, nullable=False, info={'label': 'Razón Social'})
-    name = db.Column(db.String, unique=True, info={
-        'label': 'Nombre',
-        'placeholder': 'Opcional',
-        'description': "Marca o nombre de fantasía utlizado por el proveedor",
-    })
+    rz = db.Column(db.String, unique=True, nullable=False)#, info={'label': 'Razón Social'})
+    name = db.Column(db.String, unique=True)#, info={
+    #    'label': 'Nombre',
+    #    'placeholder': 'Opcional',
+    #    'description': "Marca o nombre de fantasía utlizado por el proveedor",
+    #})
 
-    #type = db.Column(ChoiceType(TYPES))
-    type = db.Column(ChoiceType(SupplierType))
+    type = db.Column(ChoiceType(TYPES))#, info={'label': 'Tipo de Proveedor'})
 
-    delivery_included = db.Column(db.Boolean)
+    delivery_included = db.Column(db.Boolean)#, info={'label': 'Incluye flete?'})
 
     debt = db.Column(db.Numeric(10, 2))
     expired = db.Column(db.Numeric(10, 2))

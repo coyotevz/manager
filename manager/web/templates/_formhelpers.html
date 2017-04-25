@@ -1,0 +1,52 @@
+{% macro render_field(field) %}
+  {% set with_label = kwargs.pop('with_label', True) %}
+  {% set placeholder = kwargs.pop('placeholder', '') %}
+  {% if not with_label %}
+    {% set placeholder = field.label.text %}
+  {% endif %}
+
+  {% set class_ = [] %}
+  {% if 'class_' in kwargs %}
+    {% do class_.append(kwargs.pop('class_', '')) %}
+  {% endif %}
+
+
+
+  {% if field.type == 'BooleanField' %}
+
+    {% do class_.append('form-check-input') %}
+    <div class="form-group">
+      <label class="form-check-label">
+        {{ field(class_=class_|join(' '), **kwargs) }} {{ field.label.text|safe }}
+      </label>
+    </div>
+
+  {% else %}
+
+    <div class="form-group{% if field.errors %} has-danger{% endif %}">
+      {% if with_label %}
+      <label for="{{ field.id }}" class="form-control-label">
+        {{ field.label.text }}{% if field.flags.required %}<span class="label-required"> *</span>{% endif %}
+      </label>
+      {% endif %}
+
+      {% if field.type == 'FileField' %}
+        {% do class_.append('form-control-file') %}
+      {% else %}
+        {% do class_.append('form-control') %}
+      {% endif %}
+
+      {{ field(class_=class_|join(' '), placeholder=placeholder, **kwargs) }}
+
+      {% if field.errors %}
+        <div class="form-control-feedback">
+          <span>{{ field.errors|join(', ') }}</span>
+        </div>
+      {% endif %}
+      {% if field.description %}
+        <small class="form-text text-muted">{{ field.description }}</small>
+      {% endif %}
+    </div>
+
+  {% endif %}
+{% endmacro %}

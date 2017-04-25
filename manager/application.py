@@ -34,3 +34,5 @@ def configure_app(app, config=None):
             app.config.from_object('localconfig.LocalConfig')
         except ImportError:
             app.config.from_object('manager.config.DevelopmentConfig')
+
+    app.jinja_env.add_extension('jinja2.ext.do')

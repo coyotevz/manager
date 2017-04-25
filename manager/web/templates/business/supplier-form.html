@@ -1,24 +1,8 @@
 {% extends "business/layout.html" %}
+{% from "_formhelpers.html" import render_field %}
 
 {% block title %}{% if new %}Nuevo{% else %}Editar{% endif %} proveedor{% endblock %}
 {% set buz_active_page = 'suppliers' %}
-
-{% macro render_form_group(field) %}
-  <div class="form-group{% if field.errors %} has-danger{% endif %}">
-    {{ field.label(class_="form-control-label") }}
-    {{ field(class_="form-control") }}
-    {% if field.errors %}
-      <div class="form-control-feedback">
-        {% for error in field.errors %}
-          <span>{{ error }}</span>
-        {% endfor %}
-      </div>
-    {% endif %}
-    {% if field.description %}
-      <small class="form-text text-muted">{{ field.description }}</small>
-    {% endif %}
-  </div>
-{% endmacro %}
 
 {% block buz %}
   <div class="card">
@@ -28,48 +12,19 @@
     <div class="card-block">
       <form method="post" id="supplier-form">
         {{ form.hidden_tag() }}
-        {{ render_form_group(form.rz) }}
-        {{ render_form_group(form.name) }}
-        {% if new %}
+        {{ render_field(form.rz) }}
+        {{ render_field(form.name) }}
+        {{ render_field(form.type) }}
+        {{ render_field(form.delivery_included) }}
+
         <div class="btn-group">
-          <button type="button" class="btn btn-primary" id="btnCreate">Crear</button>
-          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-          </button>
-          <div class="dropdown-menu">
-            <button class="dropdown-item" type="button" id="btnCreateAdd">Crear y agregar otro</button>
-          </div>
+          <button type="submit" class="btn btn-primary">{% if new %}Crear{% else %}Actualizar{% endif %}</button>
+          {% if not new %}
+            <a class="btn btn-danger" href="{{ url_for('.supplier_delete') }}">Eliminar</a>
+          {% endif %}
         </div>
-        {% else %}
-        <span>Write update button and functionality</span>
-        {% endif %}
+
       </form>
     </div>
   </div>
-{% endblock %}
-
-{% block page_script %}
-  <script>
-    $(function() {
-      $('#btnCreate').click(function(e) {
-        var data = $('#supplier-form').find('select, textarea, input').serialize();
-        axios.post('', data)
-          .then(function(response) {
-            $(location).attr('href', '{{ url_for(".suppliers") }}');
-          })
-          .catch(function(error) {
-            console.log('error:', error);
-          });
-      });
-      $('#btnCreateAdd').click(function(e) {
-        var data = $('#supplier-form').find('select, textarea, input').serialize();
-        axios.post('', data)
-          .then(function(response) {
-            $('#supplier-form')[0].reset();
-          })
-          .catch(function(error) {
-            console.log('error:', error);
-          });
-      });
-    });
-  </script>
 {% endblock %}

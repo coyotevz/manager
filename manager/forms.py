@@ -21,3 +21,12 @@ class SupplierForm(ModelForm):
     class Meta:
         model = Supplier
         only = ('rz', 'name', 'type', 'delivery_included')
+        field_args = {
+            'rz': {'label': 'Razón Social'},
+            'name': {
+                'label': 'Nombre',
+                'description': "Marca o nombre de fantasía utilizado por el proveedor",
+            },
+            'type': {'label': 'Tipo de Proveedor'},
+            'delivery_included': {'label': 'Incluye flete?'},
+        }
