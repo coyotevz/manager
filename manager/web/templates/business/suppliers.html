@@ -12,13 +12,15 @@
   </tr>
 {% endmacro %}
 
+{% set has_suppliers = suppliers.count() > 0 %}
+
 {% block buz %}
   <div class="card">
     <div class="card-header d-flex">
       <h5>Proveedores</h5>
-      <a class="btn btn-primary btn-sm ml-auto" href="{{ url_for('business.supplier_new') }}">Nuevo Proveedor</a>
+      {% if has_suppliers %}<a class="btn btn-primary btn-sm ml-auto" href="{{ url_for('.supplier_new') }}">Nuevo Proveedor</a>{% endif %}
     </div>
-    {% if suppliers.count() > 0 %}
+    {% if has_suppliers %}
       <div class="card-block p-0">
         <table class="table table-bordered table-sm m-0 suppliers-list">
           <thead>
@@ -35,9 +37,14 @@
           </tbody>
         </table>
       </div>
-      <div class="card-footer p-0">
-        <nav>
-          <ul class="pagination justify-content-end mt-3 mr-3">
+      <div class="card-footer">
+        <div class="btn-toolbar justify-content-between align-items-center">
+        <div class="btn-group btn-group-sm" role="group">
+          <a class="btn btn-secondary btn-sm" href="{{ url_for('.supplier_new') }}">Importar</a>
+          <a class="btn btn-secondary btn-sm" href="{{ url_for('.supplier_new') }}">Exportar</a>
+        </div>
+        <nav class="ml-auto">
+          <ul class="pagination mb-0">
             <li class="page-item disabled">
               <span class="page-link">Previous</span>
             </li>
@@ -56,10 +63,13 @@
           </ul>
         </nav>
       </div>
+    </div>
   {% else %}
-    <div class="card-block">
+    <div class="card-block text-center">
       <h4 class="card-title">No hay proveedores todavía</h4>
-      <span class="card-text">Cree proveedores nuevos en forma individual o importe sus proveedores.</span>
+      <p class="card-text">Cree proveedores nuevos en forma individual o importe sus proveedores.</p>
+      <a class="btn btn-primary" href="{{ url_for('.supplier_new') }}">Crear Proveedor</a>
+      <a class="btn btn-primary disabled" href="{{ url_for('.supplier_new') }}">Importar Proveedores</a>
     </div>
   {% endif %}
   </div>

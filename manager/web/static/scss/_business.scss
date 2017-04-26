@@ -25,6 +25,10 @@
     .card-block {
       //box-shadow: inset 0 0 1px 1px rgba(0,0,0,0.05);
     }
+
+    table {
+      background-color: #fff;
+    }
   }
 
   .summary-card {
@@ -58,25 +62,9 @@
     }
   }
 
+
+
   .suppliers-list,
   .purchase-documents-list {
-    @extend .table-bordered;
-    margin-bottom: 0;
-    background-color: #fff;
-    border: none;
-    thead th {
-      font-size: 12px;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      border-top: none;
-      border-bottom-width: 1px;
-    }
-    th,
-    td {
-      vertical-align: middle;
-      border-right: 0;
-    }
-    tr td {
-      border-bottom: 0;
-    }
   }
 }
