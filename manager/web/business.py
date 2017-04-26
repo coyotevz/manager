@@ -51,4 +51,4 @@ def supplier_edit(id):
 
 @buz.route('/purchase-documents')
 def purchase_documents():
-    return render_template('business/purchase-documents.html')
+    return render_template('business/purchase-documents.html', documents=None)
