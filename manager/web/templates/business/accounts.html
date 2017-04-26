@@ -17,12 +17,15 @@
   {% endfor %}
 {% endmacro %}
 
+{% set has_accounts = accounts.count() > 0 %}
+
 {% block buz %}
   <div class="card">
     <div class="card-header d-flex">
       <h5>Plan de cuentas</h5>
-      <button class="btn btn-primary btn-sm ml-auto">Nueva Cuenta</button>
+      {% if has_accounts %}<button class="btn btn-primary btn-sm ml-auto">Nueva Cuenta</button>{% endif %}
     </div>
+    {% if has_accounts %}
     <div class="card-block">
       <table class="table table-sm account-chart">
         <tbody>
@@ -32,6 +35,14 @@
         </tbody>
       </table>
     </div>
+    {% else %}
+      <div class="card-block text-center">
+        <h4 class="card-title">No tiene un plan de cuentas</h4>
+        <p class="card-text">Cree su plan de cuentas siguiendo el asistente o importe un plan de cuentas.</p>
+        <a class="btn btn-primary mr-3" href="{{ url_for('.accounts') }}">Crear Plan de Cuentas</a>
+        <a class="btn btn-primary disabled" href="{{ url_for('.accounts') }}">Importar Plan de Cuentas</a>
+      </div>
+    {% endif %}
   </div>
 {% endblock %}
 
