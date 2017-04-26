@@ -18,20 +18,24 @@
       <h5>Proveedores</h5>
       <a class="btn btn-primary btn-sm ml-auto" href="{{ url_for('business.supplier_new') }}">Nuevo Proveedor</a>
     </div>
-    <table class="table table-sm suppliers-list">
-      <thead>
-        <tr>
-          {% for title in ["Razón Social", "Nombre", "Facturas", "A pagar"] %}
-            <th><a href="#">{{ title }}</a></th>
+    {% if suppliers.count() > 0 %}
+      <table class="table table-sm suppliers-list">
+        <thead>
+          <tr>
+            {% for title in ["Razón Social", "Nombre", "Facturas", "A pagar"] %}
+              <th><a href="#">{{ title }}</a></th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for supplier in suppliers %}
+            {{ render_supplier_row(supplier) }}
           {% endfor %}
-        </tr>
-      </thead>
-      <tbody>
-        {% for supplier in suppliers %}
-          {{ render_supplier_row(supplier) }}
-        {% endfor %}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    {% else %}
+      <span>No hay proveedores cargados todavía.</span>
+    {% endif %}
   </div>
 {% endblock %}
 
@@ -51,3 +55,6 @@
     });
   </script>
 {% endblock %}
+
+{# vim:ft=htmljinja:sw=2
+#}
