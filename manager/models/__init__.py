@@ -12,3 +12,4 @@ def configure_db(app):
 
 from .account import Account, AccountTransaction, AccountTransactionEntry
 from .supplier import Supplier
+from .purchase import PurchaseDocument

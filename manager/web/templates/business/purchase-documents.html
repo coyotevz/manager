@@ -6,7 +6,7 @@
 {% macro render_document_row(document) %}
   <tr>
     <td class="document-issue-date">{{ document.issue_date }}</td>
-    <td class="document-number"><a href="{{ url_for('.documents', id=document.id) }}">{{ document.full_desc }}</a></td>
+    <td class="document-number"><a href="{{ url_for('.documents', id=document.id) }}">{{ document.number_display }}</a></td>
     <td class="supplier-name">{{ document.supplier.rz }}</td>
     <td class="document-amount">{{ document.amount }}</td>
     <td class="document-debt">{{ document.expired }}</td>
