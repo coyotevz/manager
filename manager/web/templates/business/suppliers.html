@@ -19,23 +19,49 @@
       <a class="btn btn-primary btn-sm ml-auto" href="{{ url_for('business.supplier_new') }}">Nuevo Proveedor</a>
     </div>
     {% if suppliers.count() > 0 %}
-      <table class="table table-sm suppliers-list">
-        <thead>
-          <tr>
-            {% for title in ["Razón Social", "Nombre", "Facturas", "A pagar"] %}
-              <th><a href="#">{{ title }}</a></th>
+      <div class="card-block p-0">
+        <table class="table table-bordered table-sm m-0 suppliers-list">
+          <thead>
+            <tr>
+              {% for title in ["Razón Social", "Nombre", "Facturas", "A pagar"] %}
+                <th><a href="#">{{ title }}</a></th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for supplier in suppliers %}
+              {{ render_supplier_row(supplier) }}
             {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          {% for supplier in suppliers %}
-            {{ render_supplier_row(supplier) }}
-          {% endfor %}
-        </tbody>
-      </table>
-    {% else %}
-      <span>No hay proveedores cargados todavía.</span>
-    {% endif %}
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer p-0">
+        <nav>
+          <ul class="pagination justify-content-end mt-3 mr-3">
+            <li class="page-item disabled">
+              <span class="page-link">Previous</span>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item active">
+              <span class="page-link">2</span>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+  {% else %}
+    <div class="card-block">
+      <h4 class="card-title">No hay proveedores todavía</h4>
+      <span class="card-text">Cree proveedores nuevos en forma individual o importe sus proveedores.</span>
+    </div>
+  {% endif %}
   </div>
 {% endblock %}
 
