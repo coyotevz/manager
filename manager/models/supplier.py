@@ -2,7 +2,6 @@
 
 """Simple suppliers model"""
 
-from enum import Enum
 from decimal import Decimal
 from sqlalchemy_utils import ChoiceType
 
@@ -23,16 +22,10 @@ class Supplier(db.Model):
     ]
 
     id = db.Column(db.Integer, primary_key=True)
-    rz = db.Column(db.String, unique=True, nullable=False)#, info={'label': 'Razón Social'})
-    name = db.Column(db.String, unique=True)#, info={
-    #    'label': 'Nombre',
-    #    'placeholder': 'Opcional',
-    #    'description': "Marca o nombre de fantasía utlizado por el proveedor",
-    #})
-
-    type = db.Column(ChoiceType(TYPES))#, info={'label': 'Tipo de Proveedor'})
-
-    delivery_included = db.Column(db.Boolean)#, info={'label': 'Incluye flete?'})
+    rz = db.Column(db.String, unique=True, nullable=False)
+    name = db.Column(db.String, unique=True)
+    type = db.Column(ChoiceType(TYPES))
+    delivery_included = db.Column(db.Boolean)
 
     debt = db.Column(db.Numeric(10, 2))
     expired = db.Column(db.Numeric(10, 2))
