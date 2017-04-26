@@ -62,9 +62,23 @@
     }
   }
 
-
-
   .suppliers-list,
   .purchase-documents-list {
+  }
+
+  .purchase-documents-list {
+    .document-amount-header,
+    .document-debt-header,
+    .document-amount-footer,
+    .document-debt-footer,
+    .document-amount,
+    .document-debt {
+      @extend .text-right;
+    }
+
+    .document-state-header,
+    .document-state {
+      @extend .text-center;
+    }
   }
 }

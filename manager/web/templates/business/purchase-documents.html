@@ -12,12 +12,12 @@
     <table class="table table-sm purchase-documents-list">
       <thead>
         <tr>
-          <th>Fecha</th>
-          <th>Número</th>
-          <th>Proveedor</th>
-          <th>Total factura</th>
-          <th>Saldo adeudado</th>
-          <th>Estado</th>
+          <th class="document-issue-data-header">Fecha</th>
+          <th class="document-number-header">Número</th>
+          <th class="supplier-name-header">Proveedor</th>
+          <th class="document-amount-header">Total factura</th>
+          <th class="document-debt-header">Saldo adeudado</th>
+          <th class="document-state-header">Estado</th>
         </tr>
       </thead>
       <tfoot>
@@ -25,28 +25,32 @@
           <th></th>
           <th></th>
           <th></th>
-          <th>$ 57.449,25</th>
-          <th>$ 12.384,25</th>
-          <th></th>
+          <th class="document-amount-footer">$ 57.449,25</th>
+          <th class="document-debt-footer">$ 12.384,25</th>
+          <th class="document-state-footer"></th>
         </tr>
       </tfoot>
       <tbody>
         <!-- faked data -->
         <tr>
-          <td>17/04/2017</td>
-          <td><a href="#">000103-00456321</a></td>
-          <td>FV S.A.</td>
-          <td>$ 12.384,25</td>
-          <td>$ 12.384,25</td>
-          <td>Vence en 4 días</td>
+          <td class="document-issue-date">17/04/2017</td>
+          <td class="document-number"><a href="#">FA 000103-00456321</a></td>
+          <td class="supplier-name">FV S.A.</td>
+          <td class="document-amount">$ 12.384,25</td>
+          <td class="document-debt">$ 12.384,25</td>
+          <td class="document-state">
+            <span class="badge badge-warning">Vence en 4 días</span>
+          </td>
         </tr>
         <tr>
-          <td>29/03/2017</td>
-          <td><a href="#">000045-00006589</a></td>
-          <td>IPS S.A.C.I. y F.</td>
-          <td>$ 45.065,00</td>
-          <td>$ 0,00</td>
-          <td>Pagado</td>
+          <td class="document-issue-date">29/03/2017</td>
+          <td class="document-number"><a href="#">FA 000045-00006589</a></td>
+          <td class="supplier-name">IPS S.A.C.I. y F.</td>
+          <td class="document-amount">$ 45.065,00</td>
+          <td class="document-debt">$ 0,00</td>
+          <td class="document-state">
+            <span class="badge badge-success">Pagado</span>
+          </td>
         </tr>
       </tbody>
     </table>
