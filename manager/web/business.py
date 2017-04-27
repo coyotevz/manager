@@ -57,6 +57,7 @@ def purchase_documents():
 @buz.route('/purchase-documents/new', methods=['GET', 'POST'])
 def purchase_document_new():
     form = PurchaseDocumentForm()
+    form.supplier.query = Supplier.query.filter(Supplier.type==Supplier.TYPE_PRODUCTS)
     if form.validate_on_submit():
         return redirect(url_for('.purchase_documents'))
     return render_template('business/purchase-document-form.html', new=True, form=form)

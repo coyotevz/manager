@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from flask_wtf import FlaskForm
-from wtforms_alchemy import model_form_factory
+from wtforms_alchemy import model_form_factory, ModelFieldList
+from wtforms.fields import FormField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 from .models import db, Supplier, PurchaseDocument
 
@@ -36,3 +38,5 @@ class PurchaseDocumentForm(ModelForm):
 
     class Meta:
         model = PurchaseDocument
+
+    supplier = QuerySelectField('Proveedor', get_label='rz')
