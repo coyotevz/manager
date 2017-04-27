@@ -2,8 +2,8 @@
 
 from flask import Blueprint, render_template, redirect, url_for, request
 
-from ..models import db, Account, Supplier
-from ..forms import SupplierForm
+from ..models import db, Account, Supplier, PurchaseDocument
+from ..forms import SupplierForm, PurchaseDocumentForm
 
 
 buz = Blueprint('business', __name__, url_prefix='/business')
@@ -51,4 +51,12 @@ def supplier_edit(id):
 
 @buz.route('/purchase-documents')
 def purchase_documents():
-    return render_template('business/purchase-documents.html', documents=None)
+    documents = PurchaseDocument.query
+    return render_template('business/purchase-documents.html', documents=documents)
+
+@buz.route('/purchase-documents/new', methods=['GET', 'POST'])
+def purchase_document_new():
+    form = PurchaseDocumentForm()
+    if form.validate_on_submit():
+        return redirect(url_for('.purchase_documents'))
+    return render_template('business/purchase-document-form.html', new=True, form=form)

@@ -1,0 +1,34 @@
+{% extends "business/layout.html" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block title %}{% if new %}Nueva{% else %}Editar{% endif %} factura de compra{% endblock %}
+{% set buz_active_page = 'purchase_documents' %}
+
+{% block buz %}
+  <div class="card">
+    <div class="card-header d-flex">
+      <h5>Nueva Factura de Compra</h5>
+    </div>
+    <div class="card-block">
+      <form method="post" id="supplier-form">
+        {{ form.hidden_tag() }}
+        {{ render_field(form.type) }}
+        {{ render_field(form.pos) }}
+        {{ render_field(form.number) }}
+        {{ render_field(form.issue_date) }}
+        {{ render_field(form.amount) }}
+
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary">{% if new %}Crear{% else %}Actualizar{% endif %}</button>
+          {% if not new %}
+            <a class="btn btn-danger" href="{{ url_for('.purchase_document_delete') }}">Eliminar</a>
+          {% endif %}
+        </div>
+
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{# vim:ft=htmljinja:sw=2
+#}

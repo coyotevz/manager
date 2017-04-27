@@ -42,7 +42,7 @@ class PurchaseDocument(db.Model):
     amount = db.Column(db.Numeric(10, 2), nullable=False)
     notes = db.Column(db.String)
     creation_date = db.Column(db.DateTime)
-    issue_data = db.Column(db.Date)
+    issue_date = db.Column(db.Date)
     receipt_date = db.Column(db.Date)
     expiration_date = db.Column(db.Date)
     status = db.Column(ChoiceType(STATUSES))
@@ -81,10 +81,11 @@ class PurchaseOrder(db.Model):
 
     METHOD_EMAIL = 'EMAIL'
     METHOD_FAX = 'FAX'
+    METHOD_PHONE = 'PHONE'
     METHOD_PERSONALLY = 'PERSONALLY'
 
     METHODS = [
-        (METHOD_MAIL, 'Correo Electrónico'),
+        (METHOD_EMAIL, 'Correo Electrónico'),
         (METHOD_FAX, 'Fax'),
         (METHOD_PHONE, 'Telefónico'),
         (METHOD_PERSONALLY, 'Personalmente'),
@@ -110,5 +111,5 @@ class PurchaseOrderItem(db.Model):
     quantity = db.Column(db.Integer)
     received_quantity = db.Column(db.Integer, default=0)
 
-    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
+    order_id = db.Column(db.Integer, db.ForeignKey('purchase_order.id'), nullable=False)
     order = db.relationship(PurchaseOrder, backref='items')

@@ -16,13 +16,13 @@
   </tr>
 {% endmacro %}
 
-{% set has_documents = False %}
+{% set has_documents = documents.count() > 0 %}
 
 {% block buz %}
   <div class="card">
     <div class="card-header d-flex">
       <h5>Facturas de compra</h5>
-      {% if has_documents %}<button class="btn btn-primary btn-sm ml-auto">Nueva Factura</button>{% endif %}
+      {% if has_documents %}<a class="btn btn-primary btn-sm ml-auto" href="{{ url_for('.purchase_document_new') }}">Nueva Factura</a>{% endif %}
     </div>
     {% if has_documents %}
       <div class="card-block p-0">
@@ -76,8 +76,8 @@
       <div class="card-block text-center">
         <h4 class="card-title">No hay documentos todavía.</h4>
         <p class="card-text">Cree documentos nuevos o importe sus documentos existentes.</p>
-        <a class="btn btn-primary mr-3" href="{{ url_for('.purchase_documents') }}">Crear Documento</a>
-        <a class="btn btn-primary disabled" href="{{ url_for('.purchase_documents') }}">Importar Documentos</a>
+        <a class="btn btn-primary mr-3" href="{{ url_for('.purchase_document_new') }}">Crear Documento</a>
+        <a class="btn btn-primary disabled" href="{{ url_for('.purchase_document_new') }}">Importar Documentos</a>
       </div>
     {% endif %}
   </div>

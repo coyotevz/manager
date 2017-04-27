@@ -3,7 +3,7 @@
 from flask_wtf import FlaskForm
 from wtforms_alchemy import model_form_factory
 
-from .models import db, Supplier
+from .models import db, Supplier, PurchaseDocument
 
 
 BaseModelForm = model_form_factory(FlaskForm)
@@ -25,8 +25,14 @@ class SupplierForm(ModelForm):
             'rz': {'label': 'Razón Social'},
             'name': {
                 'label': 'Nombre',
-                'description': "Marca o nombre de fantasía utilizado por el proveedor",
+                'description': "Marca o nombre de fantasía utilizado por el proveedor (Opcional)",
             },
             'type': {'label': 'Tipo de Proveedor'},
             'delivery_included': {'label': 'Incluye flete?'},
         }
+
+
+class PurchaseDocumentForm(ModelForm):
+
+    class Meta:
+        model = PurchaseDocument
